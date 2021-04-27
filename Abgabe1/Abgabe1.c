@@ -33,19 +33,24 @@ Rückgabe:
     Zeiger auf das erste Zeichen der übergebenen Zeichenkette die nach den Letzten zwei hintereinander folgenden Doppelpunkten liegt
 */
 char* extract(char* input) {
+    char* r;
+    r = input;
+
     while (*input != '\0') {
         if (*input == ':') {
             input++;
             if (*input == ':') {
-                input++;
                 while (*input == ':') {
                     input++;
                 }
                 return extract(input);
             }
         }
+        else {
+            input++;
+        }
     }
-    return input;
+    return r;
 }
 
 /*
@@ -92,15 +97,14 @@ Rückgabe:
 */
 Test testExpected(char* input, char* output) {
     Test t;
-
     int flag = 0;
+    char* result = extract(input);
 
-    while (*input != '\0' || *output != '\0') {
-        if (*input == *output) {
-            input++;
+    while (*result != '\0' || *output != '\0') {
+        if (*result == *output) {
+            result++;
             output++;
-        }
-        else if ((*input == '\0' && *output != '\0') || (*input != '\0' && *output == '\0') || *input != *output) {
+        } else if ((*result == '\0' && *output != '\0') || (*result != '\0' && *output == '\0') || *result != *output) {
             flag = 1;
             break;
         }
@@ -120,7 +124,7 @@ Test testExpected(char* input, char* output) {
 Funktion: runTests
 
 Beschreibung:
-    Führt automatische Tests und Prüfft ob die aus dem Eingaben extrahierte Suffixe den erwarteten entsprechen.
+    Führt automatische Tests und prüft ob die aus dem Eingaben extrahierte Suffixe den erwarteten entsprechen.
     Die Ausgabe der Testergebnisse erfolgt auf der Konsole.
 
 Parameter:
@@ -138,9 +142,9 @@ void runTests(int no, TestCase test[]) {
         printf("Test %d: ", i);
         t = testExpected(test[i].input, test[i].expected);
         if (OK == t)
-            printf("OK \n"); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("OK - %s, %s \n", extract(test[i].input), test[i].expected); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         if (FAIL == t)
-            printf("FAIL \n"); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("FAIL - Funktionsrueckgabe: %s, Erwartet: %s \n", extract(test[i].input), test[i].expected); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         printf("\n");
     }
 }
