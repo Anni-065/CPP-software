@@ -8,11 +8,11 @@
 #include <stdio.h>
  // es sind keine Weiter Bibliotheken erlaubt
 
-#define TEST_CASES_COUNT   11		// Anzahl der Tests
+#define TEST_CASES_COUNT   9		// Anzahl der Tests
 
 //Teststruktur eines Testpaares. Enthält Zeiger die zu testende Zeichenkette sowie auf dem erwarteten Suffix
 typedef struct {
-    char* input;		// Zeiger auf die ursprüngliche Zeichenkette
+    char* input;	// Zeiger auf die ursprüngliche Zeichenkette
     char* expected;	//Zeiger auf dem erwarteten Ergebnis
 } TestCase;
 
@@ -43,10 +43,9 @@ char* extract(char* input) {
                 while (*input == ':') {
                     input++;
                 }
-                return extract(input);
+                r = extract(input);
             }
-        }
-        else {
+        } else {
             input++;
         }
     }
@@ -142,9 +141,9 @@ void runTests(int no, TestCase test[]) {
         printf("Test %d: ", i);
         t = testExpected(test[i].input, test[i].expected);
         if (OK == t)
-            printf("OK - %s, %s \n", extract(test[i].input), test[i].expected); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("OK - Eingabe: %s, Erwartet: %s, Ausgabe: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         if (FAIL == t)
-            printf("FAIL - Funktionsrueckgabe: %s, Erwartet: %s \n", extract(test[i].input), test[i].expected); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("FAIL - Eingabe: %s, Erwartet: %s, Ausgabe: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         printf("\n");
     }
 }
@@ -161,12 +160,12 @@ int main() {
          {"Hallo::", ""},
          {"::Hallo", "Hallo"},
          {"Hal:::lo", "lo"},
-
-         {"Hallo", ""},
-         {"Hallo", ""},
+         {"H::all::o", "o"},
+         {"H::all:::o", "o"},
          // es folgen Tests die die Funktionsfähigkeit der Testfunktion überprüfen. Der Kunde will sehen dass die Testfunktion Fehler erkennen kann.
-         {"Hallo", ""},
-         {"Hallo", ""}
+         /*{"H::allo", ""},
+         {"H:allo", "allo"},
+         {"Hal:::lo", ":lo"}*/
     };
 
     runTests(TEST_CASES_COUNT, tests); // Tests der Funktion extract ausführen
