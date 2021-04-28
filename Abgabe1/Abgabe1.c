@@ -97,16 +97,47 @@ Parameter:
 Rückgabe:
         OK oder Fail je nach dem ob die extrahierte Zeichenkette der Übergebenen entsprochen hat (OK), oder nicht (FALSE)
 */
-Test testExpected(char* input, char* output) {
+Test testExpected(char* input, char* expected) {
     Test t;
     int flag = 0;
     char* result = extract(input);
 
-    while (*result != '\0' || *output != '\0') {
-        if (*result == *output) {
+    printf("Input: %s, Expected: %s Output: %s", input, expected, result);
+
+    while (*result != '\0' || *expected != '\0') {
+        if (*result == *expected) {
             result++;
-            output++;
-        } else if ((*result == '\0' && *output != '\0') || (*result != '\0' && *output == '\0') || *result != *output) {
+            expected++;
+        } else if ((*result == '\0' && *expected != '\0') || (*result != '\0' && *expected == '\0') || *result != *expected) {
+            flag = 1;
+            break;
+        }
+    }
+
+    if (flag == 0) {
+        t = OK;
+    }
+    else {
+        t = FAIL;
+    }
+
+    return t;
+}
+
+Test testExpected2(char* input, char* expected) {
+    Test t;
+    int flag = 0;
+    char* result;    // Zeiger reservieren
+    extract2(input, &result);    // Adresse des Zeigers "Ergebnis" übergeben
+
+    printf("Input: %s, Expected: %s Output: %s", input, expected, result);
+
+    while (*result != '\0' || *expected != '\0') {
+        if (*result == *expected) {
+            result++;
+            expected++;
+        }
+        else if ((*result == '\0' && *expected != '\0') || (*result != '\0' && *expected == '\0') || *result != *expected) {
             flag = 1;
             break;
         }
@@ -119,12 +150,6 @@ Test testExpected(char* input, char* output) {
         t = FAIL;
     }
     return t;
-}
-
-Test testExpected2(char* input, char* expected) {
-    Test t;
-    char* ergebnis;    // Zeiger reservieren
-    extract2(input, &ergebnis);    // Adresse des Zeigers "Ergebnis" übergeben
 }
 
 /*
@@ -145,20 +170,30 @@ void runTests(int no, TestCase test[]) {
     Test t;
     int i;
 
+    printf("AUFGABE 1.1! \n\n");
     for (i = 0; i < no; i++) {
         printf("Test %d: ", i);
         t = testExpected(test[i].input, test[i].expected);
         if (OK == t)
-            printf("OK - Input: %s, Expected: %s, Output: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf(" -> OK\n");
         if (FAIL == t)
-            printf("FAIL - Input: %s, Expected: %s, Output: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf(" -> FAIL\n"); 
+        printf("\n");
+    }
+
+    printf("AUFGABE 1.2! \n\n");
+    for (i = 0; i < no; i++) {
+        printf("Test %d: ", i);
+        t = testExpected2(test[i].input, test[i].expected);
+        if (OK == t)
+            printf(" -> OK\n");
+        if (FAIL == t)
+            printf(" -> FAIL\n");
         printf("\n");
     }
 }
 
 int main() {
-    printf("Hallo Aufgabe 1! \n\n");
-
     TestCase tests[TEST_CASES_COUNT] = {
          {"", ""},	// Sonderfall
          {"Hel::lo", "lo"},
@@ -179,7 +214,5 @@ int main() {
          {"Hal:::lo", ":lo"}
     };
 
-    runTests(TEST_CASES_COUNT, tests); // Tests der Funktion extract ausführen
-
-                                      // Tests der Funktion extract2 ausführen
+    runTests(TEST_CASES_COUNT, tests); // Tests der Funktion extract und extract2 ausführen
 }
