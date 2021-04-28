@@ -6,9 +6,8 @@
  */
 
 #include <stdio.h>
- // es sind keine Weiter Bibliotheken erlaubt
 
-#define TEST_CASES_COUNT   9		// Anzahl der Tests
+#define TEST_CASES_COUNT   16		// Anzahl der Tests
 
 //Teststruktur eines Testpaares. Enthält Zeiger die zu testende Zeichenkette sowie auf dem erwarteten Suffix
 typedef struct {
@@ -33,27 +32,34 @@ Rückgabe:
     Zeiger auf das erste Zeichen der übergebenen Zeichenkette die nach den Letzten zwei hintereinander folgenden Doppelpunkten liegt
 */
 char* extract(char* input) {
-    char* r;
-    r = input;
+    char* r = input;
+    int counter = 0;
 
-    while (*input != '\0') {
+    while(*input != '\0') {
         if (*input == ':') {
             input++;
             if (*input == ':') {
                 while (*input == ':') {
                     input++;
                 }
-                r = extract(input);
+                counter++;
+                r = input;
             }
-        } else {
-            input++;
+        }
+        if (*input != '\0') {
+           input++;
         }
     }
+
+    if (counter == 0) {
+        r = input;
+    }
+    
     return r;
 }
 
 /*
-Funktion : extract
+Funktion : extract2
 Beschreibung :
     Sucht den Suffix in einer Zeichenkette und liefert diesem zurück.
     Der Suffix ist definiert als alle Zeichen nach den Letzten zwei nacheinander folgenden Doppelpunkten die als Trennzeichen dienen.
@@ -69,16 +75,13 @@ Parameter:
 Rückgabe:
     Keine
 */
-void extract2(char* input, char** output)
-{
-    // Hier sollte Ihre eigene Implementierung von extract2 weilen, die extract verwendet
+void extract2(char* input, char** output) {
     *output = extract(input);
 }
 
-
 typedef enum {
     OK,		// Test war OK
-    FAIL		// Test ist fehlgeschlagen
+    FAIL	// Test ist fehlgeschlagen
 } Test;
 
 /*
@@ -118,6 +121,11 @@ Test testExpected(char* input, char* output) {
     return t;
 }
 
+Test testExpected2(char* input, char* expected) {
+    Test t;
+    char* ergebnis;    // Zeiger reservieren
+    extract2(input, &ergebnis);    // Adresse des Zeigers "Ergebnis" übergeben
+}
 
 /*
 Funktion: runTests
@@ -141,31 +149,34 @@ void runTests(int no, TestCase test[]) {
         printf("Test %d: ", i);
         t = testExpected(test[i].input, test[i].expected);
         if (OK == t)
-            printf("OK - Eingabe: %s, Erwartet: %s, Ausgabe: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("OK - Input: %s, Expected: %s, Output: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         if (FAIL == t)
-            printf("FAIL - Eingabe: %s, Erwartet: %s, Ausgabe: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
+            printf("FAIL - Input: %s, Expected: %s, Output: %s \n", test[i].input, test[i].expected, extract(test[i].input)); // das ist hier zu wenig. Bitte um sinnvolle Angaben erweitern so das der Kunde bei der Präsentation ohne den Debugger erkennen kann was hier passiert!
         printf("\n");
     }
 }
 
 int main() {
-    printf("Hallo Aufgabe 1! \n");
+    printf("Hallo Aufgabe 1! \n\n");
 
-    // Bitte mit sinnvollen Tests füllen
     TestCase tests[TEST_CASES_COUNT] = {
          {"", ""},	// Sonderfall
-         {"Hal::lo", "lo"},
-         {"Hall::o", "o"},
-         {"Hallo", ""},
-         {"Hallo::", ""},
-         {"::Hallo", "Hallo"},
-         {"Hal:::lo", "lo"},
-         {"H::all::o", "o"},
-         {"H::all:::o", "o"},
+         {"Hel::lo", "lo"},
+         {"Hell::o", "o"},
+         {"Hello", ""},
+         {"::Hello", "Hello"},
+         {"Hel::lo", "lo"},
+         {"Hello::", ""},
+         {"Hel:::lo", "lo"},
+         {"H::ell::o", "o"},
+         {"H::ell:::o", "o"},
+         {":Hell:::o", "o"},
+         {"::", ""},
+         {":::", ""},
          // es folgen Tests die die Funktionsfähigkeit der Testfunktion überprüfen. Der Kunde will sehen dass die Testfunktion Fehler erkennen kann.
-         /*{"H::allo", ""},
+         {"H::allo", ""},
          {"H:allo", "allo"},
-         {"Hal:::lo", ":lo"}*/
+         {"Hal:::lo", ":lo"}
     };
 
     runTests(TEST_CASES_COUNT, tests); // Tests der Funktion extract ausführen
