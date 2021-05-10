@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define TEST_CASES_COUNT   16		// Anzahl der Tests
+#define TEST_CASES_COUNT   15		// Anzahl der Tests
 
 //Teststruktur eines Testpaares. Enthält Zeiger die zu testende Zeichenkette sowie auf dem erwarteten Suffix
 typedef struct {
@@ -160,7 +160,7 @@ Beschreibung:
     Die Ausgabe der Testergebnisse erfolgt auf der Konsole.
 
 Parameter:
-        no 	  - Anzahl der Tests die durchgeführt werden sollten
+        no 	 - Anzahl der Tests die durchgeführt werden sollten
         test - Struktur die zu Prüfende Paare enthält
 
 Rückgabe:
@@ -170,7 +170,7 @@ void runTests(int no, TestCase test[]) {
     Test t;
     int i;
 
-    printf("AUFGABE 1.1! \n\n");
+    printf("AUFGABE 1.1 (extract) \n\n");
     for (i = 0; i < no; i++) {
         printf("Test %d: ", i);
         t = testExpected(test[i].input, test[i].expected);
@@ -181,7 +181,7 @@ void runTests(int no, TestCase test[]) {
         printf("\n");
     }
 
-    printf("AUFGABE 1.2! \n\n");
+    printf("AUFGABE 1.2 (extract2) \n\n");
     for (i = 0; i < no; i++) {
         printf("Test %d: ", i);
         t = testExpected2(test[i].input, test[i].expected);
@@ -196,19 +196,18 @@ void runTests(int no, TestCase test[]) {
 int main() {
     TestCase tests[TEST_CASES_COUNT] = {
          {"", ""},	// Sonderfall
-         {"Hel::lo", "lo"},
-         {"Hell::o", "o"},
-         {"Hello", ""},
-         {"::Hello", "Hello"},
-         {"Hel::lo", "lo"},
-         {"Hello::", ""},
-         {"Hel:::lo", "lo"},
-         {"H::ell::o", "o"},
-         {"H::ell:::o", "o"},
-         {":Hell:::o", "o"},
+         {"Hallo", ""},
+         {"Hal::lo", "lo"},
+         {"Hall::o", "o"},
+         {"::Hallo", "Hallo"},
+         {"Hallo::", ""},
+         {"H::all::o", "o"},
+         {"Hal:::lo", "lo"},
+         {"H::all:::o", "o"},
+         {":Hall:::o", "o"},
          {"::", ""},
          {":::", ""},
-         // es folgen Tests die die Funktionsfähigkeit der Testfunktion überprüfen. Der Kunde will sehen dass die Testfunktion Fehler erkennen kann.
+         // es folgen Tests die die Funktionsfähigkeit der Testfunktion überprüfen.
          {"H::allo", ""},
          {"H:allo", "allo"},
          {"Hal:::lo", ":lo"}
