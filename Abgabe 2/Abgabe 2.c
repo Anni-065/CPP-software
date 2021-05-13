@@ -6,6 +6,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include "Abgabe 2.h"
  // es sind keine Weiter Bibliotheken erlaubt
 
  /*
@@ -31,10 +32,6 @@ int length(char* s) {
 	return n;
 }
 
-
-
-
-
 // Annahme: n ist > 0
 void copy(char* s, int n, char* t) {
 	int i = 0;
@@ -43,8 +40,6 @@ void copy(char* s, int n, char* t) {
 		i++;
 	}
 }
-
-
 
 /*
 Funktion : reverse
@@ -65,13 +60,18 @@ Parameter:
 Rückgabe:
 	Zeiger auf die neue umgedrehte Zeichenkette
 */
+char* reverse(char* s) {
+	int n = length(s);
+	char* res = malloc(sizeof(char) * (n + 1));
+	int i = 0;
 
-char* reverse(char* s)
-{
-	// Hier sollte Ihre eigene Implementierung von reverse weilen
+	while (i < n) {
+		res[i] = s[n-i-1];
+		i++;
+	}
+	res[i] = '\0';
+	return res;
 }
-
-
 
 /*
 Funktion : putBack
@@ -79,11 +79,9 @@ Beschreibung :
 	Fügt am Ende der übergebenen Zeichenkette (s) ein Zeichen (c) ein.
 	Der für die neue Zeichenkette benötigter Speicherplatz wird auf dem Heap reserviert.
 
-
 Parameter:
 	s - Zeichenkette die ein neues Zeichen aufnehmen soll
 	c - Zeichen das am anfang der Zeichenkette (s) eingefügt werden soll
-
 
 Rückgabe:
 	neue, um das übergebene Zeichen erweiterte Zeichenkette.
@@ -115,23 +113,35 @@ Parameter:
 Rückgabe:
 	Zeiger auf die neue umgedrehte Zeichenkette
 */
-char* reverseRec(char* s)
-{
-	// Hier sollte Ihre eigene Implementierung von reverseRec weilen
-	if (*s == '\0')
-	{
-		// Rekursionsabbruch
+char* reverseRec(char* s) {
+	if (*s == '\0')	{
+		char* n = malloc(sizeof(char) * 1);
+		*n = '\0';
+		return n;
 	}
-
-
+	char* n = reverseRec(++s);
+	s--;
+	s = putBack(n, *s);	
+	free(n);
+	return s;
 }
 
-int main()
-{
-	printf("Hallo Aufgabe 2!");
+int main() {
+	printf("Hallo Aufgabe 2!\n\n");
 
-	// Hier sind keine Automatischen Tests notwendig. Es reicht einfach nur ein paar umgedrehte Zeichenketten auf der Konsole auszugeben. 
+	char* test1 = "12345";
+	char* test2 = "abcde";
+	char* test3 = "a";
 
+	printf("%s reverse: %s\n", test1, reverse(test1));
+	printf("%s reverse: %s\n", test2, reverse(test2));
+	printf("%s reverse: %s\n", test3, reverse(test3));
+
+	printf("\n");
+
+	printf("%s reverseRec: %s\n", test1, reverseRec(test1));
+	printf("%s reverseRec: %s\n", test2, reverseRec(test2));
+	printf("%s reverseRec: %s\n", test3, reverseRec(test3));
 
 	return 0;
 }
