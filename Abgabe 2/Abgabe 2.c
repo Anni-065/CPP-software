@@ -6,7 +6,6 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "Abgabe 2.h"
  // es sind keine Weiter Bibliotheken erlaubt
 
  /*
