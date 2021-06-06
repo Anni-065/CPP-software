@@ -5,11 +5,11 @@ using namespace std;
 #include "String.h"
 
 /*
-Konstruktor : Standard Konstruktor
-Beschreibung :
+Konstruktor: Standard Konstruktor
+Beschreibung:
 	Konstruktor eines Stringobjekts.
 	Initialisiert die aktuelle Instanz.
-	Erstellt einem Leere Zeichenkette als Inhalt des Objekts
+	Erstellt einem leere Zeichenkette als Inhalt des Objekts.
 
 Parameter:
 	keine
@@ -25,11 +25,11 @@ String::String() {
 
 
 /*
-Konstruktor : Zeichen
-Beschreibung :
+Konstruktor: Zeichen
+Beschreibung:
 	Konstruktor eines Stringobjekts.
 	Initialisiert die aktuelle Instanz.
-	Das übergebene Zeichen wird als String des Objekts gespeichert
+	Das übergebene Zeichen wird als String des Objekts gespeichert.
 
 Parameter:
 	c - Zeichen
@@ -46,11 +46,11 @@ String::String(char c) {
 
 
 /*
-Konstruktor : Zeichenkette
-Beschreibung :
+Konstruktor: Zeichenkette
+Beschreibung:
 	Konstruktor eines Stringobjekts.
 	Initialisiert die aktuelle Instanz.
-	Die übergeben Zeichenkette wird als String des Objekts gespeichert
+	Die übergeben Zeichenkette wird als String des Objekts gespeichert.
 
 Parameter:
 	s - Zeichenkette
@@ -58,114 +58,119 @@ Parameter:
 Rückgabe:
 	keine
 */
-
 String::String(const char* s) {
-	// TODO
+	int size = 0;
+	while(*s != '\0') {
+		size++;
+		s++;
+	}
+	size++;
+
+	String str = new char[size];
+
+	for (int i = 0; i < size; i++) {
+		str[i] = s[i];
+	}
+	str[size] = '\0';
 }
 
 /*
-Konstruktor : Kopierkonstruktor
-Beschreibung :
+Konstruktor: Kopierkonstruktor
+Beschreibung:
 	Konstruktor eines Stringobjekts.
 	Initialisiert die aktuelle Instanz.
-	Kopiert die Zeichenkette des als Parameter Übergebenen String Objekts
+	Kopiert die Zeichenkette des als Parameter Übergebenen String Objekts.
 
 Parameter:
-	s - Objekt aus dem die Zeichenkette kopiert wird
+	s - Objekt aus dem die Zeichenkette kopiert wird.
 
 Rückgabe:
 	keine
 */
-
 String::String(const String& s) {
-	// TODO
+	//TODO
 }
 
 
 /*
-Konstruktor : Verschiebekonstruktor
-Beschreibung :
+Konstruktor: Verschiebekonstruktor
+Beschreibung:
 	Konstruktor einer Stringobjekt.
 	Initialisiert die aktuelle Instanz.
-	Übernimmt die Zeichenkette der Übergebenen Instanz
-
-
+	Übernimmt die Zeichenkette der Übergebenen Instanz.
+ü
 Parameter:
-	s - Objekt aus dem die Zeichenkette Übernommen wird
+	s - Objekt aus dem die Zeichenkette übernommen wird.
 
 Rückgabe:
 	keine
 */
 String::String(String&& s) {
-	// TODO
+	//TODO
 }
 
 String::~String() { delete[] str; }
 
 
 /*
-Operator : []
-Beschreibung :
-	Liefert das an der  übergebenen Position vorhanden Zeichen zurück.
+Operator: []
+Beschreibung:
+	Liefert das an der übergebenen Position vorhanden Zeichen zurück.
 
 Parameter:
-	index - Position des Zeichen in der Zeichenkette
+	index - Position des Zeichen in der Zeichenkette.
 
 Rückgabe:
-	Zeichen an der Stelle index
+	Zeichen an der Stelle index.
 */
 char& String::operator[](int index) {
-	// TODO
+	//TODO
 }
 
 
 /*
-Operator : =
-Beschreibung :
-	Kopiert den Inhalt des Übergebenen String Objektes in das aktuelle Objekt.
-
+Operator: =
+Beschreibung:
+	Kopiert den Inhalt des übergebenen String Objektes in das aktuelle Objekt.
 
 Parameter:
-	s - Referenz auf eine String Instanz aus dem der Inhalt Kopiert wird
+	s - Referenz auf eine String Instanz aus dem der Inhalt kopiert wird.
 
 Rückgabe:
-	Referenz auf das aktuelle Stringobjekt
+	Referenz auf das aktuelle Stringobjekt.
 */
 String& String::operator=(const String& s) {
-	// TODO
+	//TODO
 }
 
 
 /*
-Operator : = (move)
+Operator: = (move)
 Beschreibung :
-	verschiebt den Inhalt des Übergebenen String Objektes in das aktuelle Objekt.
-
+	verschiebt den Inhalt des übergebenen String Objektes in das aktuelle Objekt.
 
 Parameter:
-	s - Referenz auf eine String Instanz aus dem der Inhalt verschoben wird
+	s - Referenz auf eine String Instanz aus dem der Inhalt verschoben wird.
 
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
 String& String::operator=(String&& s) {
-	// TODO
+	//TODO
 }
 
 
-
 /*
-Operator : +
+Operator: +
 Beschreibung :
-	Hängt den Inhalt des Übergebenen String Objektes an das aktuelle Objekt an.
-
+	Hängt den Inhalt des übergebenen String Objektes an das aktuelle Objekt an.
 
 Parameter:
-	s - Referenz auf eine String Instanz aus dem der Inhalt angehängt wird
+	s - Referenz auf eine String Instanz aus dem der Inhalt angehängt wird.
 
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
 String& String::operator+=(String& s) {
-	// TODO
+	//TODO
 }
