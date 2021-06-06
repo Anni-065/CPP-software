@@ -96,7 +96,6 @@ Parameter:
 Rückgabe:
 	keine
 */
-
 String::String(String&& s) {
 	// TODO
 }
@@ -115,7 +114,6 @@ Parameter:
 Rückgabe:
 	Zeichen an der Stelle index
 */
-
 char& String::operator[](int index) {
 	// TODO
 }
@@ -133,7 +131,6 @@ Parameter:
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
-
 String& String::operator=(const String& s) {
 	// TODO
 }
@@ -151,7 +148,6 @@ Parameter:
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
-
 String& String::operator=(String&& s) {
 	// TODO
 }
@@ -161,7 +157,7 @@ String& String::operator=(String&& s) {
 /*
 Operator : +
 Beschreibung :
-	hängt den Inhalt des Übergebenen String Objektes an das aktuelle Objekt na.
+	Hängt den Inhalt des Übergebenen String Objektes an das aktuelle Objekt an.
 
 
 Parameter:
@@ -170,7 +166,6 @@ Parameter:
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
-
 String& String::operator+=(String& s) {
 	// TODO
 }

@@ -15,5 +15,4 @@ int main() {
 
     cout << s << endl;
     cout << s2 << endl;
-
 }

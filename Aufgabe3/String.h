@@ -7,6 +7,7 @@ private:
     // 'String' is represented internally as a plain C-style string.
     int size;
     char* str;
+
 public:
     String();
     String(char c);
