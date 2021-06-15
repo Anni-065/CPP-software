@@ -59,17 +59,19 @@ Rückgabe:
 	keine
 */
 String::String(const char* s) {
-	int size = 0;
-	while(*s != '\0') {
+	size = 0;
+
+	while (*s != '\0') {
 		size++;
 		s++;
 	}
 	size++;
 
-	String str = new char[size];
+	str = new char[size];
 
 	for (int i = 0; i < size; i++) {
 		str[i] = s[i];
+		i++;
 	}
 	str[size] = '\0';
 }
@@ -79,7 +81,7 @@ Konstruktor: Kopierkonstruktor
 Beschreibung:
 	Konstruktor eines Stringobjekts.
 	Initialisiert die aktuelle Instanz.
-	Kopiert die Zeichenkette des als Parameter Übergebenen String Objekts.
+	Kopiert die Zeichenkette des als Parameter übergebenen String Objekts.
 
 Parameter:
 	s - Objekt aus dem die Zeichenkette kopiert wird.
@@ -88,7 +90,17 @@ Rückgabe:
 	keine
 */
 String::String(const String& s) {
-	//TODO
+	str = new char[s.size + 1];
+	char* p = s.str;
+
+	int i = 0;
+
+	while (*p != '\0') {
+		str[i] = *p;
+		i++;
+	}
+
+	str[size] = '\0';
 }
 
 
@@ -98,7 +110,7 @@ Beschreibung:
 	Konstruktor einer Stringobjekt.
 	Initialisiert die aktuelle Instanz.
 	Übernimmt die Zeichenkette der Übergebenen Instanz.
-ü
+
 Parameter:
 	s - Objekt aus dem die Zeichenkette übernommen wird.
 
@@ -108,7 +120,6 @@ Rückgabe:
 String::String(String&& s) {
 	//TODO
 }
-
 String::~String() { delete[] str; }
 
 
