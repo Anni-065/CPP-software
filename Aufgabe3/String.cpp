@@ -160,13 +160,9 @@ Rückgabe:
 */
 String& String::operator=(const String& s) {
 	if (this != &s) {
-		delete[] str;
-		str = new char[s.size];
-		size = s.size;
-
-		String(s);
+		delete str;
+		str = s.str;
 	}
-
 	return *this;
 }
 
@@ -174,7 +170,7 @@ String& String::operator=(const String& s) {
 /*
 Operator: = (move)
 Beschreibung :
-	verschiebt den Inhalt des übergebenen String Objektes in das aktuelle Objekt.
+	Verschiebt den Inhalt des übergebenen String Objektes in das aktuelle Objekt.
 
 Parameter:
 	s - Referenz auf eine String Instanz aus dem der Inhalt verschoben wird.
@@ -183,7 +179,13 @@ Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
 */
 String& String::operator=(String&& s) {
-	//TODO
+	if (this != &s) {
+		delete this->str;
+		this->str = str;
+		s.str = nullptr;
+		this->size = s.size;
+	}
+	return *this;
 }
 
 
@@ -197,7 +199,38 @@ Parameter:
 
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
+
+
+	int size;
+	char* str;
 */
 String& String::operator+=(String& s) {
-	//TODO
+	char* p = str;
+	int oldSize = size;
+	int i = 0;
+
+	while (*p != '\0') {
+		p[i] = *str;
+		i++;
+		p++;
+	}
+
+	size = size + s.size;
+	delete str;
+	str = new char[size + 1];
+	i = 0;
+
+	while (i < oldSize) {
+		*str = p[i];
+		i++;
+		str++;
+	}
+	while (i < size) {
+		*str = s[i];
+		i++;
+		str++;
+	}
+	str[size] = '\0';
+
+	return *this;
 }
