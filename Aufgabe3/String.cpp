@@ -98,6 +98,7 @@ String::String(const String& s) {
 	while (*p != '\0') {
 		str[i] = *p;
 		i++;
+		p++;
 	}
 
 	str[size] = '\0';
@@ -109,7 +110,7 @@ Konstruktor: Verschiebekonstruktor
 Beschreibung:
 	Konstruktor einer Stringobjekt.
 	Initialisiert die aktuelle Instanz.
-	Übernimmt die Zeichenkette der Übergebenen Instanz.
+	Übernimmt die Zeichenkette der übergebenen Instanz.
 
 Parameter:
 	s - Objekt aus dem die Zeichenkette übernommen wird.
@@ -118,9 +119,14 @@ Rückgabe:
 	keine
 */
 String::String(String&& s) {
-	//TODO
+	this->size = s.size;
+	this->str = s.str;
+
+	s = nullptr;
 }
-String::~String() { delete[] str; }
+String::~String() { 
+	delete[] str;
+}
 
 
 /*
@@ -135,7 +141,9 @@ Rückgabe:
 	Zeichen an der Stelle index.
 */
 char& String::operator[](int index) {
-	//TODO
+	char* retStr;
+	retStr = str + index - 1;
+	return *retStr;
 }
 
 
@@ -151,7 +159,15 @@ Rückgabe:
 	Referenz auf das aktuelle Stringobjekt.
 */
 String& String::operator=(const String& s) {
-	//TODO
+	if (this != &s) {
+		delete[] str;
+		str = new char[s.size];
+		size = s.size;
+
+		String(s);
+	}
+
+	return *this;
 }
 
 
