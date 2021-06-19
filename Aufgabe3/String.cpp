@@ -60,21 +60,21 @@ Rückgabe:
 */
 String::String(const char* s) {
 	size = 0;
+	const char* temp = s;
 
 	while (*s != '\0') {
 		size++;
 		s++;
 	}
-	size++;
 
-	str = new char[size];
+	str = new char[size + 1];
 
 	for (int i = 0; i < size; i++) {
-		str[i] = s[i];
-		i++;
+		str[i] = temp[i];
 	}
 	str[size] = '\0';
 }
+
 
 /*
 Konstruktor: Kopierkonstruktor
@@ -91,16 +91,15 @@ Rückgabe:
 */
 String::String(const String& s) {
 	str = new char[s.size + 1];
+	size = s.size;
 	char* p = s.str;
 
 	int i = 0;
 
-	while (*p != '\0') {
-		str[i] = *p;
+	while (p[i] != '\0') {
+		str[i] = p[i];
 		i++;
-		p++;
 	}
-
 	str[size] = '\0';
 }
 
@@ -160,8 +159,19 @@ Rückgabe:
 */
 String& String::operator=(const String& s) {
 	if (this != &s) {
-		delete str;
-		str = s.str;
+		delete[] str;
+		size = s.size;
+
+		str = new char[s.size + 1];
+		char* p = s.str;
+
+		int i = 0;
+
+		while (p[i] != '\0') {
+			str[i] = p[i];
+			i++;
+		}
+		str[size] = '\0';
 	}
 	return *this;
 }
@@ -180,17 +190,20 @@ Rückgabe:
 */
 String& String::operator=(String&& s) {
 	if (this != &s) {
-		delete this->str;
-		this->str = str;
+		delete[] str;
+
+		str = s.str;
+		size = s.size;
+
+		s.size = 0;
 		s.str = nullptr;
-		this->size = s.size;
 	}
 	return *this;
 }
 
 
 /*
-Operator: +
+Operator: +=
 Beschreibung :
 	Hängt den Inhalt des übergebenen String Objektes an das aktuelle Objekt an.
 
@@ -199,37 +212,24 @@ Parameter:
 
 Rückgabe:
 	Referenz auf das aktuelle Stringobjekt
-
-
-	int size;
-	char* str;
 */
 String& String::operator+=(String& s) {
-	char* p = str;
-	int oldSize = size;
+	String temp = str;
+	delete[] str;
+	str = new char[size + s.size + 1];
+
 	int i = 0;
 
-	while (*p != '\0') {
-		p[i] = *str;
+	while (temp.str[i] != '\0') {
+		str[i] = temp.str[i];
 		i++;
-		p++;
 	}
-
-	size = size + s.size;
-	delete str;
-	str = new char[size + 1];
 	i = 0;
-
-	while (i < oldSize) {
-		*str = p[i];
+	while (s.str[i] != '\0') {
+		str[size + i] = s.str[i];
 		i++;
-		str++;
 	}
-	while (i < size) {
-		*str = s[i];
-		i++;
-		str++;
-	}
+	size = size + s.size;
 	str[size] = '\0';
 
 	return *this;
