@@ -121,6 +121,7 @@ String::String(String&& s) {
 	this->size = s.size;
 	this->str = s.str;
 
+	s.size = 0;
 	s = nullptr;
 }
 String::~String() { 

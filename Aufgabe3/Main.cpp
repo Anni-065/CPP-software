@@ -10,8 +10,8 @@ ostream& operator<< (ostream& out, String& s) {
 
 
 int main() {
-    String s("Hallo");
-    String s2("TEst");
+    String s("Eins");
+    String s2("Zwei");
 
     cout << s << endl;
     s += s2;
