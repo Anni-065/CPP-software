@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ast.cpp" />
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="testParser.cpp" />
+    <ClCompile Include="testVM.cpp" />
+    <ClCompile Include="tokenizer.cpp" />
+    <ClCompile Include="vm.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ast.h" />
+    <ClInclude Include="parser.h" />
+    <ClInclude Include="tokenizer.h" />
+    <ClInclude Include="utility.h" />
+    <ClInclude Include="vm.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,21 +153,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\ast.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\parser.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\testParser.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\testVM.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\tokenizer.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\vm.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\ast.h" />
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\parser.h" />
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\tokenizer.h" />
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\utility.h" />
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\vm.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

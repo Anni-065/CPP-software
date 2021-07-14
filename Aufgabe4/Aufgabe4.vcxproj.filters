@@ -15,39 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\testParser.cpp">
+    <ClCompile Include="ast.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\testVM.cpp">
+    <ClCompile Include="parser.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\tokenizer.cpp">
+    <ClCompile Include="testParser.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\vm.cpp">
+    <ClCompile Include="testVM.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\ast.cpp">
+    <ClCompile Include="tokenizer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\IB_FrJo1025_4\parser.cpp">
+    <ClCompile Include="vm.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\tokenizer.h">
+    <ClInclude Include="ast.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\utility.h">
+    <ClInclude Include="parser.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\vm.h">
+    <ClInclude Include="tokenizer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\ast.h">
+    <ClInclude Include="utility.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\IB_FrJo1025_4\parser.h">
+    <ClInclude Include="vm.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
