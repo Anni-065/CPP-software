@@ -79,7 +79,7 @@ void MultExp::printExp(string* s, std::shared_ptr<Exp> e) {
 /*
 Methode: pretty
 Klasse: PlusExp
-Beschreibung :
+Beschreibung:
     Bearbeitet den aktuellen Knoten eines Multiplikationsausdrucks und gibt diesen als ein Stringobjekt zurück.
     Das erstellte Objekt beinhaltet neben dem eigentlichen Knoten auch alle diesem Knoten zugeordneten Tochterknoten.
     Der gesammte Ausdruck wird in dem erstellten Stringobjekt automatisch mit eine Anfangs- sowie Endklammer versehen.
@@ -106,8 +106,8 @@ vector<Code> MultExp::cleverPretty() {
     return e1_cPretty;
 }
 /*
-Methode  : newInt
-Klasse : IntExp
+Methode: newInt
+Klasse: IntExp
 Beschreibung :
     Erstellt einem neuem Ausdruck/Objekt vom typ IntExp.
     Der neu erstellter Knoten ist immer ein Endknoten und bestzt selbst keine Äste.
