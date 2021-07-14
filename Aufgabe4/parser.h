@@ -30,8 +30,7 @@ public:
     Parser(string s) : t(Tokenizer(s)) { }
 
     Optional<EXP> parse() {
-        Optional<EXP> e = parseE();
-
+        Optional<EXP> e = parseE(); 
         return e;
     }
 };

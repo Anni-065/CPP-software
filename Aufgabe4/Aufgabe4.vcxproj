@@ -33,6 +33,9 @@
     <ClInclude Include="utility.h" />
     <ClInclude Include="vm.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

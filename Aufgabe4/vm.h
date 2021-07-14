@@ -12,16 +12,12 @@ using namespace std;
 
 
 /*
-
 Stack-based VM, instructions supported are:
 
   Push i
   Plus
   Mult
-
- */
-
-
+  */
 
 typedef enum {
     PUSH,
@@ -45,9 +41,7 @@ public:
 // Short-hands
 
 Code newPush(int i);
-
 Code newPlus();
-
 Code newMult();
 
 class VM {
@@ -57,10 +51,6 @@ public:
     VM(vector<Code> c) : code(c) {}
 
     Optional<int> run();
-
 };
-
-
-
 
 #endif // __VM__

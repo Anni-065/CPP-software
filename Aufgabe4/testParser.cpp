@@ -1,14 +1,10 @@
-
 #include <iostream>
 #include <string>
 
-using namespace std;
-
+using namespace std; 
 
 #include "parser.h"
-#include "ast.h"
-
-
+#include "ast.h" 
 
 void display(Optional<EXP> e) {
     if (e.isNothing()) {
@@ -20,13 +16,9 @@ void display(Optional<EXP> e) {
     return;
 }
 
-void testParserGood() {
-
-
+void testParserGood() { 
     display(Parser("1").parse());
-
     display(Parser("1 + 0 ").parse());
-
     display(Parser("1 + (0) ").parse());
     display(Parser("1 + 2 * 0 ").parse());
 
@@ -46,15 +38,12 @@ void testParserGood() {
     display(Parser("((1 + 2) * 0 + 2)").parse());
 }
 
-void testParser() {
-
+void testParser() { 
     testParserGood();
 }
 
 
-int main() {
-
-    testParser();
-
+int main() { 
+    testParser(); 
     return 0;
 }

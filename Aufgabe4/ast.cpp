@@ -8,10 +8,10 @@ using namespace std;
 int IntExp::eval() { return val; }
 
 /*
-Methode  : pretty
-Klasse : IntExp
+Methode: pretty
+Klasse: IntExp
 Beschreibung :
-    Bearbeitet den aktuellen Knoten einer Ganzzahl Ausdrucks und gibt diesem als ein Stringobjekt zurück.
+    Bearbeitet den aktuellen Knoten eines Ganzzahl Ausdrucks und gibt diesen als ein Stringobjekt zurück.
 .
 
 Parameter:
@@ -20,8 +20,6 @@ Parameter:
 Rückgabe:
     ein Stringobjekt mit der Textrepresentation dieses Knotens.
 */
-
-
 string IntExp::pretty() {
     return to_string(val);
 }
@@ -33,20 +31,19 @@ vector<Code> IntExp::superpretty() {
 int PlusExp::eval() { return e1->eval() + e2->eval(); }
 
 /*
-Methode  : pretty
-Klasse : PlusExp
+Methode: pretty
+Klasse: PlusExp
 Beschreibung :
-    Bearbeitet den Aktuellen Knoten einer Additionsausdrucks und gibt diesem als ein Stringobjekt zurück.
-    Das erstellte Objekt beinhaltet neben dem eigentlichen Knotten auch alle diesem Knoten zugeordnete Tochterknoten.
-    Der Gesammte Ausdruck wird in dem erstelltten Stringobjekt automatisch mit eine Anfangs sowie endklammer versehen.
+    Bearbeitet den aktuellen Knoten eines Additionsausdrucks und gibt diesen als ein Stringobjekt zurück.
+    Das erstellte Objekt beinhaltet neben dem eigentlichen Knoten auch alle diesem Knoten zugeordneten Tochterknoten.
+    Der gesammte Ausdruck wird in dem erstellten Stringobjekt automatisch mit eine Anfangs- sowie Endklammer versehen.
 
 Parameter:
     keine
 
 Rückgabe:
-    ein Stringobjekt mit der Textrepresentation dieses Knotens sowie allen diesem Knoten zugewisenen Tochterknoten.
+    Ein Stringobjekt mit der Textrepresäntation dieses Knotens, sowie allen diesem Knoten zugewisenen Tochterknoten.
 */
-
 string PlusExp::pretty() {
     string s("");
     s.append(e1->pretty())
@@ -57,11 +54,11 @@ string PlusExp::pretty() {
 /*
  * Original Methode Pretty
 string PlusExp::pretty() {
-    string s("(");				// "klammer öffnen" anhängen
-    s.append(e1->pretty());		// linken Knotten ausführen und das Ergebnis anhängen
+    string s("(");				// "Klammer öffnen" anhängen
+    s.append(e1->pretty());		// Linken Knoten ausführen und das Ergebnis anhängen
     s.append("+");				// Pluszeichen anhängen
-    s.append(e2->pretty());		// rechten Knotten ausführen und das Ergebnis anhängen
-    s.append(")");    			// "klammer zu" anhängen
+    s.append(e2->pretty());		// Rechten Knoten ausführen und das Ergebnis anhängen
+    s.append(")");    			// "Klammer zu" anhängen
     return s;
 }*/
 
@@ -83,21 +80,21 @@ void MultExp::printExp(string* s, std::shared_ptr<Exp> e) {
         s->append(e->pretty());
     }
 }
+
 /*
 Methode  : pretty
 Klasse : PlusExp
 Beschreibung :
-    Bearbeitet den Aktuellen Knoten eines Multiplikationsausdrucks und gibt diesem als ein Stringobjekt zurück.
-    Das erstellte Objekt beinhaltet neben dem eigentlichen Knotten auch alle diesem Knoten zugeordnete Tochterknoten.
-    Der Gesammte Ausdruck wird in dem erstelltten Stringobjekt automatisch mit eine Anfangs- sowie Endklammer versehen.
+    Bearbeitet den aktuellen Knoten eines Multiplikationsausdrucks und gibt diesen als ein Stringobjekt zurück.
+    Das erstellte Objekt beinhaltet neben dem eigentlichen Knoten auch alle diesem Knoten zugeordneten Tochterknoten.
+    Der gesammte Ausdruck wird in dem erstellten Stringobjekt automatisch mit eine Anfangs- sowie Endklammer versehen.
 
 Parameter:
     keine
 
 Rückgabe:
-    ein Stringobjekt mit der Textrepresentation dieses Knotens sowie allen diesem Knoten zugewisenen Tochterknoten.
+    Ein Stringobjekt mit der Textrepräsentation dieses Knotens sowie aller diesem Knoten zugewiesenen Tochterknoten.
 */
-
 string MultExp::pretty() {
     string s("");
     printExp(&s, e1);
@@ -121,70 +118,49 @@ Beschreibung :
     Der neu erstellter Knoten ist immer ein Endknoten und bestzt selbst keine Äste.
 
 Parameter:
-    i - wert des Knotens.
+    i - Wert des Knotens.
 
 Rückgabe:
-    ein Objekt vom TYP IntExp
+    Ein Objekt vom Typ IntExp
 */
-
 EXP newInt(int i) {
     return std::make_shared<IntExp>(i);
 }
+
 /*
-Methode  : newPlus
-Klasse : PlusExp
+Methode: newPlus
+Klasse: PlusExp
 Beschreibung :
-    Erstellt einem neuem Ausdruck/Objekt vom typ PlusExp.
+    Erstellt einen neuen Ausdruck/Objekt vom Typ PlusExp.
     Der Objekt PlusExp ist ein Knoten der immer zwei Äste besitz.
-    Dem knoten werden die beiden als Parameter angegebenen Expresionen ala linker und rechter Ast zugewiesen.
-
-    Beispiele:
-
-    2 + 4
-
-      +
-     / \
-    2   4
-
-Eine der zugewisenen Ausdruck kann wiederum wieitere Äaste anthalten: (ohne Gewähr da nur vermutung, nicht getestet)
-
-   2 + 4 * 5
-
-      +
-     / \
-    2   *
-       / \
-      4   5
-
+    Dem Knoten werden die beiden als Parameter angegebenen Ausdrücke als linker und rechter Ast zugewiesen.
 
 Parameter:
     l - linker Ausdruck
     r - rechter Ausdruck
 
 Rückgabe:
-        ein Objekt vom TYP PlusExp
+        ein Objekt vom Typ PlusExp
 */
-
 EXP newPlus(EXP l, EXP r) {
     return std::make_shared<PlusExp>(l, r);
 }
+
 /*
-Methode  : newMult
-Klasse : MultExp
+Methode: newMult
+Klasse: MultExp
 Beschreibung :
-    Erstellt einem neuem Ausdruck/Objekt vom typ MultExp.
+    Erstellt einen neuen Ausdruck/Objekt vom Typ MultExp.
     Der Objekt MultExp ist ein Knoten der immer zwei Äste besitz.
-    Dem Knoten werden die beiden als Parameter angegebenen Expresionen ala linker und rechter Ast zugewiesen.
+    Dem Knoten werden die beiden als Parameter angegebenen Ausdrücke als linker und rechter Ast zugewiesen.
 
 Parameter:
     l - linker Ausdruck
     r - rechter Ausdruck
 
 Rückgabe:
-        ein Objekt vom TYP PlusExp
-*/
-
-
+        Ein Objekt vom TYP PlusExp
+*/ 
 EXP newMult(EXP l, EXP r) {
     return std::make_shared<MultExp>(l, r);
 }
