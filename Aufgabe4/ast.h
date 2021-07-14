@@ -21,7 +21,7 @@ class Exp {
 public:
     virtual int eval() = 0;
     virtual string pretty() = 0;
-    virtual vector<Code> superpretty() = 0;
+    virtual vector<Code> cleverPretty() = 0;
     Exp_t expType;
 };
 
@@ -34,7 +34,7 @@ public:
     }
     int eval();
     string pretty();
-    vector<Code> superpretty();
+    vector<Code> cleverPretty();
 };
 
 class PlusExp : public Exp {
@@ -48,7 +48,7 @@ public:
     }
     int eval();
     string pretty();
-    vector<Code> superpretty();
+    vector<Code> cleverPretty();
 };
 
 
@@ -64,7 +64,7 @@ public:
     }
     int eval();
     string pretty();
-    vector<Code> superpretty();
+    vector<Code> cleverPretty();
 };
 
 // Short-hands

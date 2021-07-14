@@ -5,14 +5,15 @@ using namespace std;
 
 #include "ast.h"
 
-int IntExp::eval() { return val; }
+int IntExp::eval() { 
+    return val;
+}
 
 /*
 Methode: pretty
 Klasse: IntExp
 Beschreibung :
     Bearbeitet den aktuellen Knoten eines Ganzzahl Ausdrucks und gibt diesen als ein Stringobjekt zurück.
-.
 
 Parameter:
     keine
@@ -24,11 +25,15 @@ string IntExp::pretty() {
     return to_string(val);
 }
 
-vector<Code> IntExp::superpretty() {
-    return vector<Code>{newPush(val)};
+vector<Code> IntExp::cleverPretty() {
+    return vector<Code>{
+        newPush(val)
+    };
 }
 
-int PlusExp::eval() { return e1->eval() + e2->eval(); }
+int PlusExp::eval() {
+    return e1 -> eval() + e2 -> eval(); 
+}
 
 /*
 Methode: pretty
@@ -46,44 +51,34 @@ Rückgabe:
 */
 string PlusExp::pretty() {
     string s("");
-    s.append(e1->pretty())
-        .append("+")
-        .append(e2->pretty());
+    s.append(e1 -> pretty())
+      .append("+")
+      .append(e2 -> pretty());
     return s;
 }
-/*
- * Original Methode Pretty
-string PlusExp::pretty() {
-    string s("(");				// "Klammer öffnen" anhängen
-    s.append(e1->pretty());		// Linken Knoten ausführen und das Ergebnis anhängen
-    s.append("+");				// Pluszeichen anhängen
-    s.append(e2->pretty());		// Rechten Knoten ausführen und das Ergebnis anhängen
-    s.append(")");    			// "Klammer zu" anhängen
-    return s;
-}*/
-
-vector<Code> PlusExp::superpretty() {
-    vector<Code> e1_spretty = e1->superpretty();
-    vector<Code> e2_spretty = e2->superpretty();
-    e1_spretty.insert(e1_spretty.end(), e2_spretty.begin(), e2_spretty.end());
-    e1_spretty.push_back(newPlus());
-    return e1_spretty;
+ 
+vector<Code> PlusExp::cleverPretty() {
+    vector<Code> e1_cPretty = e1 -> cleverPretty();
+    vector<Code> e2_cPretty = e2 -> cleverPretty();
+    e1_cPretty.insert(e1_cPretty.end(), e2_cPretty.begin(), e2_cPretty.end());
+    e1_cPretty.push_back(newPlus());
+    return e1_cPretty;
 }
 
-int MultExp::eval() { return e1->eval() * e2->eval(); }
+int MultExp::eval() { return e1 -> eval() * e2 -> eval(); }
 
 void MultExp::printExp(string* s, std::shared_ptr<Exp> e) {
-    if (e->expType == Exp_t::PlusExp_t) {
-        s->append("(").append(e->pretty()).append(")");
+    if (e -> expType == Exp_t::PlusExp_t) {
+        s -> append("(").append(e -> pretty()).append(")");
     }
     else {
-        s->append(e->pretty());
+        s -> append(e -> pretty());
     }
 }
 
 /*
-Methode  : pretty
-Klasse : PlusExp
+Methode: pretty
+Klasse: PlusExp
 Beschreibung :
     Bearbeitet den aktuellen Knoten eines Multiplikationsausdrucks und gibt diesen als ein Stringobjekt zurück.
     Das erstellte Objekt beinhaltet neben dem eigentlichen Knoten auch alle diesem Knoten zugeordneten Tochterknoten.
@@ -93,7 +88,7 @@ Parameter:
     keine
 
 Rückgabe:
-    Ein Stringobjekt mit der Textrepräsentation dieses Knotens sowie aller diesem Knoten zugewiesenen Tochterknoten.
+    Ein Stringobjekt mit der Textrepräsentation dieses Knotens sowie aller diesem Knoten zugewiesenen Tochterknoten
 */
 string MultExp::pretty() {
     string s("");
@@ -103,12 +98,12 @@ string MultExp::pretty() {
     return s;
 }
 
-vector<Code> MultExp::superpretty() {
-    vector<Code> e1_spretty = e1->superpretty();
-    vector<Code> e2_spretty = e2->superpretty();
-    e1_spretty.insert(e1_spretty.end(), e2_spretty.begin(), e2_spretty.end());
-    e1_spretty.push_back(newMult());
-    return e1_spretty;
+vector<Code> MultExp::cleverPretty() {
+    vector<Code> e1_cPretty = e1 -> cleverPretty();
+    vector<Code> e2_cPretty = e2 -> cleverPretty();
+    e1_cPretty.insert(e1_cPretty.end(), e2_cPretty.begin(), e2_cPretty.end());
+    e1_cPretty.push_back(newMult());
+    return e1_cPretty;
 }
 /*
 Methode  : newInt
@@ -118,7 +113,7 @@ Beschreibung :
     Der neu erstellter Knoten ist immer ein Endknoten und bestzt selbst keine Äste.
 
 Parameter:
-    i - Wert des Knotens.
+    i - Wert des Knotens
 
 Rückgabe:
     Ein Objekt vom Typ IntExp
@@ -140,7 +135,7 @@ Parameter:
     r - rechter Ausdruck
 
 Rückgabe:
-        ein Objekt vom Typ PlusExp
+        Ein Objekt vom Typ PlusExp
 */
 EXP newPlus(EXP l, EXP r) {
     return std::make_shared<PlusExp>(l, r);
@@ -159,7 +154,7 @@ Parameter:
     r - rechter Ausdruck
 
 Rückgabe:
-        Ein Objekt vom TYP PlusExp
+        Ein Objekt vom Typ PlusExp
 */ 
 EXP newMult(EXP l, EXP r) {
     return std::make_shared<MultExp>(l, r);
